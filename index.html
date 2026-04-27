@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Morin Electric LLC — Licensed Electrician, Western Mass</title>
+  <meta name="description" content="Morin Electric LLC — Family-owned electrical contractor serving the Pioneer Valley and Western Massachusetts. Residential & commercial. Free estimates." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Barlow+Condensed:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --yellow: #FFD100;
+      --yellow-dim: #c9a500;
+      --black: #0a0a0a;
+      --dark: #111111;
+      --dark2: #181818;
+      --dark3: #222222;
+      --gray: #888;
+      --light: #e8e8e8;
+      --white: #ffffff;
+      --radius: 4px;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-condensed: 'Barlow Condensed', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── SCROLLBAR ─────────────────────────── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--yellow); border-radius: 10px; }
+
+    /* ─── NOISE OVERLAY ─────────────────────── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+    }
+
+    /* ─── NAV ───────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 72px;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,209,0,0.12);
+      transition: background 0.3s;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .nav-logo span { color: var(--yellow); }
+
+    .nav-bolt {
+      width: 22px; height: 22px;
+      fill: var(--yellow);
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-condensed);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--yellow); }
+
+    .nav-cta {
+      background: var(--yellow);
+      color: var(--black) !important;
+      padding: 8px 20px;
+      border-radius: var(--radius);
+      font-weight: 700 !important;
+      transition: background 0.2s, transform 0.2s !important;
+    }
+
+    .nav-cta:hover { background: #ffe033 !important; transform: translateY(-1px); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+
+    .hamburger span {
+      display: block; width: 26px; height: 2px;
+      background: var(--white);
+      transition: all 0.3s;
+    }
+
+    /* ─── MOBILE NAV ────────────────────────── */
+    .mobile-menu {
+      display: none;
+      position: fixed; inset: 72px 0 0 0; z-index: 99;
+      background: rgba(10,10,10,0.98);
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 2.5rem;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .mobile-menu a:hover { color: var(--yellow); }
+
+    /* ─── HERO ──────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex; align-items: center;
+      overflow: hidden;
+      padding: 0 5vw;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        linear-gradient(135deg, rgba(255,209,0,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 60% at 60% 50%, rgba(255,209,0,0.05) 0%, transparent 70%),
+        var(--black);
+    }
+
+    /* Grid lines */
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(255,209,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,209,0,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 800px;
+      padding-top: 72px;
+    }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-condensed);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: block; width: 32px; height: 2px;
+      background: var(--yellow);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 10vw, 9rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title em {
+      color: var(--yellow);
+      font-style: normal;
+      display: block;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 300;
+      color: #aaa;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-condensed);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s;
+    }
+
+    .btn-primary {
+      background: var(--yellow);
+      color: var(--black);
+    }
+
+    .btn-primary:hover { background: #ffe033; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,209,0,0.3); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.25);
+    }
+
+    .btn-outline:hover { border-color: var(--yellow); color: var(--yellow); transform: translateY(-2px); }
+
+    .hero-stat-row {
+      position: absolute;
+      bottom: 60px; left: 5vw; right: 5vw;
+      z-index: 2;
+      display: flex; gap: 3rem; align-items: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      border-left: 2px solid var(--yellow);
+      padding-left: 1rem;
+    }
+
+    .hero-stat-num {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      color: var(--yellow);
+      line-height: 1;
+    }
+
+    .hero-stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      font-family: var(--font-condensed);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      right: 5vw; bottom: 60px; z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      font-family: var(--font-condensed);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      writing-mode: vertical-rl;
+      animation: scrollBounce 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+
+    /* ─── SECTION WRAPPER ───────────────────── */
+    section { position: relative; z-index: 1; }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 5vw;
+    }
+
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-condensed);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 1rem;
+    }
+
+    .section-tag::before {
+      content: '';
+      display: block; width: 24px; height: 2px;
+      background: var(--yellow);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-lead {
+      font-size: 1rem;
+      color: #999;
+      max-width: 560px;
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    /* ─── SERVICES ──────────────────────────── */
+    #services { background: var(--dark); }
+
+    .services-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      gap: 2rem; flex-wrap: wrap;
+      margin-bottom: 4rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5px;
+      background: rgba(255,209,0,0.08);
+      border: 1.5px solid rgba(255,209,0,0.08);
+    }
+
+    .service-card {
+      background: var(--dark2);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+      cursor: default;
+    }
+
+    .service-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--yellow);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+
+    .service-card:hover { background: var(--dark3); }
+    .service-card:hover::after { transform: scaleX(1); }
+
+    .service-icon {
+      width: 40px; height: 40px;
+      background: rgba(255,209,0,0.1);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.5rem;
+      transition: background 0.3s;
+    }
+
+    .service-card:hover .service-icon { background: rgba(255,209,0,0.2); }
+
+    .service-icon svg { width: 20px; height: 20px; fill: var(--yellow); }
+
+    .service-name {
+      font-family: var(--font-condensed);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+      color: var(--white);
+    }
+
+    .service-desc {
+      font-size: 0.88rem;
+      color: #777;
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    .service-num {
+      position: absolute; top: 1.2rem; right: 1.5rem;
+      font-family: var(--font-display);
+      font-size: 3rem;
+      color: rgba(255,209,0,0.06);
+      line-height: 1;
+      pointer-events: none;
+      transition: color 0.3s;
+    }
+
+    .service-card:hover .service-num { color: rgba(255,209,0,0.12); }
+
+    /* ─── ABOUT ─────────────────────────────── */
+    #about { background: var(--black); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,209,0,0.08);
+      border: 1px solid rgba(255,209,0,0.2);
+      padding: 10px 18px;
+      border-radius: 2px;
+      margin-bottom: 2rem;
+    }
+
+    .about-badge svg { width: 18px; height: 18px; fill: var(--yellow); }
+
+    .about-badge span {
+      font-family: var(--font-condensed);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--yellow);
+    }
+
+    .about-body {
+      font-size: 1rem;
+      color: #999;
+      line-height: 1.85;
+      font-weight: 300;
+      margin: 1.5rem 0;
+    }
+
+    .about-body strong { color: var(--light); font-weight: 600; }
+
+    .about-checklist {
+      list-style: none;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
+      margin: 2rem 0;
+    }
+
+    .about-checklist li {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--font-condensed);
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: #bbb;
+    }
+
+    .about-checklist li::before {
+      content: '';
+      display: block; width: 8px; height: 8px; flex-shrink: 0;
+      background: var(--yellow);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-img-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-img-wrap::before {
+      content: '';
+      position: absolute; inset: -1px;
+      background: linear-gradient(135deg, rgba(255,209,0,0.3) 0%, transparent 60%);
+      z-index: 1;
+    }
+
+    .about-img-wrap img {
+      width: 100%; display: block;
+      filter: grayscale(40%) contrast(1.1);
+      transition: filter 0.5s, transform 0.8s;
+    }
+
+    .about-img-wrap:hover img { filter: grayscale(0%) contrast(1.05); transform: scale(1.02); }
+
+    .about-accent {
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 120px; height: 120px;
+      border: 3px solid var(--yellow);
+      z-index: 0;
+    }
+
+    .about-accent2 {
+      position: absolute;
+      top: -20px; left: -20px;
+      width: 80px; height: 80px;
+      border: 2px solid rgba(255,209,0,0.3);
+      z-index: 0;
+    }
+
+    /* ─── QUOTE ─────────────────────────────── */
+    #quote { background: var(--dark); overflow: hidden; }
+
+    .quote-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .quote-info p {
+      font-size: 0.9rem; color: #777; line-height: 1.75;
+      font-weight: 300; margin-top: 1.5rem;
+    }
+
+    .quote-info p + p { margin-top: 1rem; }
+
+    .quote-info strong { color: var(--yellow); font-weight: 600; }
+
+    .quote-contact-items {
+      margin-top: 2.5rem;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+
+    .qc-item {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 0.9rem; color: #aaa;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .qc-item:hover { color: var(--yellow); }
+
+    .qc-item svg { width: 16px; height: 16px; fill: var(--yellow); flex-shrink: 0; }
+
+    /* Form */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-full { grid-column: 1 / -1; }
+
+    .form-group {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+
+    .form-group label {
+      font-family: var(--font-condensed);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--dark3);
+      border: 1.5px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 300;
+      padding: 12px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+      resize: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--yellow);
+    }
+
+    .form-group select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23888' d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 20px;
+    }
+
+    .form-group textarea { min-height: 120px; }
+
+    .form-notice {
+      font-size: 0.78rem;
+      color: #555;
+      line-height: 1.6;
+      grid-column: 1 / -1;
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255,209,0,0.05);
+      border: 1px solid rgba(255,209,0,0.2);
+      border-radius: var(--radius);
+    }
+
+    .form-success svg { width: 40px; height: 40px; fill: var(--yellow); margin-bottom: 1rem; }
+    .form-success h3 { font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 0.5rem; }
+    .form-success p { color: #888; font-size: 0.9rem; }
+
+    /* ─── TESTIMONIALS ──────────────────────── */
+    #testimonials { background: var(--black); }
+
+    .testimonials-header {
+      margin-bottom: 3rem;
+    }
+
+    .testimonials-track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: rgba(255,209,0,0.06);
+      border: 1.5px solid rgba(255,209,0,0.06);
+    }
+
+    .testimonial-card {
+      background: var(--dark2);
+      padding: 2.5rem;
+      position: relative;
+    }
+
+    .testimonial-card::before {
+      content: '\201C';
+      position: absolute; top: 1.5rem; right: 2rem;
+      font-family: var(--font-display);
+      font-size: 5rem;
+      color: rgba(255,209,0,0.1);
+      line-height: 1;
+    }
+
+    .stars {
+      display: flex; gap: 4px; margin-bottom: 1.2rem;
+    }
+
+    .stars svg { width: 14px; height: 14px; fill: var(--yellow); }
+
+    .testimonial-text {
+      font-size: 0.92rem;
+      color: #bbb;
+      line-height: 1.8;
+      font-weight: 300;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-author {
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .author-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: rgba(255,209,0,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--yellow);
+      flex-shrink: 0;
+    }
+
+    .author-name {
+      font-family: var(--font-condensed);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--white);
+    }
+
+    .author-via {
+      font-size: 0.75rem;
+      color: var(--gray);
+    }
+
+    /* ─── CONTACT ───────────────────────────── */
+    #contact {
+      background: var(--dark);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-card {
+      display: flex; align-items: flex-start; gap: 16px;
+      margin-bottom: 2rem;
+    }
+
+    .contact-card-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: rgba(255,209,0,0.08);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .contact-card-icon svg { width: 20px; height: 20px; fill: var(--yellow); }
+
+    .contact-card-label {
+      font-family: var(--font-condensed);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 4px;
+    }
+
+    .contact-card-value {
+      font-size: 1rem;
+      color: var(--white);
+    }
+
+    .contact-card-value a {
+      color: inherit; text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-card-value a:hover { color: var(--yellow); }
+
+    .map-placeholder {
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: var(--dark3);
+      border: 1.5px solid rgba(255,209,0,0.1);
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .map-placeholder iframe {
+      width: 100%; height: 100%; border: none;
+      filter: grayscale(100%) invert(92%) contrast(90%);
+    }
+
+    .map-overlay-tag {
+      position: absolute;
+      bottom: 1rem; left: 1rem;
+      background: var(--yellow);
+      color: var(--black);
+      font-family: var(--font-condensed);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 2px;
+    }
+
+    /* ─── FOOTER ────────────────────────────── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 3rem 5vw;
+    }
+
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+    }
+
+    .footer-logo span { color: var(--yellow); }
+
+    .footer-links {
+      display: flex; gap: 2rem; list-style: none; flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-family: var(--font-condensed);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--yellow); }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: #444;
+    }
+
+    /* ─── DIVIDER ───────────────────────────── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,209,0,0.3), transparent);
+      margin: 0;
+    }
+
+    /* ─── SCROLL REVEAL ─────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ─── RESPONSIVE ────────────────────────── */
+    @media (max-width: 900px) {
+      .about-grid,
+      .quote-grid,
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+      .testimonials-track { grid-template-columns: 1fr; }
+
+      .about-visual { order: -1; }
+
+      .hero-stat-row { display: none; }
+
+      .nav-links { display: none; }
+
+      .hamburger { display: flex; }
+    }
+
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-full { grid-column: 1; }
+      .about-checklist { grid-template-columns: 1fr; }
+    }
+
+    /* ─── PHONE RIBBON ──────────────────────── */
+    .phone-ribbon {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      z-index: 200;
+      background: var(--yellow);
+      color: var(--black);
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 24px rgba(255,209,0,0.35);
+      text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    .phone-ribbon:hover { transform: scale(1.1); box-shadow: 0 8px 32px rgba(255,209,0,0.5); }
+
+    .phone-ribbon svg { width: 24px; height: 24px; fill: var(--black); }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 4px 24px rgba(255,209,0,0.35); }
+      50% { box-shadow: 0 4px 32px rgba(255,209,0,0.6), 0 0 0 10px rgba(255,209,0,0.08); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── PHONE FAB ───────────────────────────── -->
+<a href="tel:4134539011" class="phone-ribbon" aria-label="Call us">
+  <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+</a>
+
+<!-- ── NAV ────────────────────────────────── -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <svg class="nav-bolt" viewBox="0 0 24 24"><path d="M13 2L4.09 12.97 11 12l-1 8 8.91-10.97H12l1-8z"/></svg>
+    Morin <span>Electric</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#quote" class="nav-cta">Free Quote</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── MOBILE MENU ────────────────────────── -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#testimonials" onclick="closeMobile()">Reviews</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+  <a href="#quote" onclick="closeMobile()" style="color:var(--yellow)">Free Quote ↗</a>
+</div>
+
+<!-- ── HERO ───────────────────────────────── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Western Massachusetts</div>
+    <h1 class="hero-title">
+      Power<br>Done
+      <em>Right.</em>
+    </h1>
+    <p class="hero-sub">
+      Family-owned electrical contractor serving the Pioneer Valley. Licensed, insured, and trusted since day one. Residential and commercial — we do it all.
+    </p>
+    <div class="hero-actions">
+      <a href="#quote" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        Get a Free Quote
+      </a>
+      <a href="tel:4134539011" class="btn btn-outline">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        413-453-9011
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stat-row">
+    <div class="hero-stat">
+      <div class="hero-stat-num">100%</div>
+      <div class="hero-stat-label">Licensed & Insured</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">Free</div>
+      <div class="hero-stat-label">Estimates</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">5★</div>
+      <div class="hero-stat-label">Customer Rating</div>
+    </div>
+  </div>
+
+  <a href="#services" class="hero-scroll">Scroll</a>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── SERVICES ───────────────────────────── -->
+<section id="services">
+  <div class="section-inner">
+    <div class="services-header">
+      <div>
+        <div class="section-tag reveal">What We Do</div>
+        <h2 class="section-title reveal reveal-delay-1">Our Services</h2>
+        <p class="section-lead reveal reveal-delay-2">Residential, commercial, indoor, outdoor — we bring the experience and skill your electrical project deserves.</p>
+      </div>
+      <a href="#quote" class="btn btn-primary reveal reveal-delay-2" style="white-space:nowrap">Request Quote →</a>
+    </div>
+
+    <div class="services-grid">
+      <!-- Cards with staggered reveal -->
+      <div class="service-card reveal">
+        <div class="service-num">01</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg>
+        </div>
+        <div class="service-name">Indoor Lighting</div>
+        <div class="service-desc">Recessed lighting, accent lighting, under-cabinet lighting, and full fixture installation.</div>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-num">02</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-5h2v5h6v-8h3L12 3z"/></svg>
+        </div>
+        <div class="service-name">Outdoor Lighting</div>
+        <div class="service-desc">Security lighting, landscape accents, pathway lighting, and exterior fixture upgrades.</div>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-num">03</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+        </div>
+        <div class="service-name">Panel Upgrades</div>
+        <div class="service-desc">Electrical panel replacements, circuit breaker repairs, and full service upgrades.</div>
+      </div>
+
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-num">04</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M17.5 5H15V3H9v2H6.5C5.67 5 5 5.67 5 6.5v14C5 21.33 5.67 22 6.5 22h11c.83 0 1.5-.67 1.5-1.5v-14C19 5.67 18.33 5 17.5 5zM9 5h6v2H9V5zm4 13H8v-2h5v2zm3-4H8v-2h8v2zm0-4H8v-2h8v2z"/></svg>
+        </div>
+        <div class="service-name">Outlets & Circuits</div>
+        <div class="service-desc">GFCI outlets, new circuit installation, electrical switches, and surge protector setups.</div>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-num">05</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M18.6 6.62c-1.44 0-2.8.56-3.77 1.53L12 10.66 10.48 12h.01L7.8 14.39c-.64.64-1.49.99-2.4.99-1.87 0-3.39-1.52-3.39-3.39S3.53 8.6 5.4 8.6c.91 0 1.76.35 2.44 1.03l1.13 1 1.51-1.34L9.22 8.2C8.2 7.18 6.84 6.62 5.4 6.62 2.42 6.62 0 9.04 0 12s2.42 5.38 5.4 5.38c1.44 0 2.8-.56 3.77-1.53l2.83-2.5.01.01L13.52 12h-.01l2.69-2.39c.64-.64 1.49-.99 2.4-.99 1.87 0 3.39 1.52 3.39 3.39s-1.52 3.39-3.39 3.39c-.9 0-1.76-.35-2.44-1.03l-1.14-1.01-1.51 1.34 1.27 1.12c1.02 1.01 2.37 1.57 3.82 1.57 2.98 0 5.4-2.41 5.4-5.38s-2.42-5.38-5.4-5.38z"/></svg>
+        </div>
+        <div class="service-name">EV Charger Install</div>
+        <div class="service-desc">Level 2 home EV charger installation — wiring and panel capacity covered.</div>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-num">06</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 20v-7H4l9-16v7h7L11 4v16z" transform="rotate(0)"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-8v4h4l-5 8z"/></svg>
+        </div>
+        <div class="service-name">Generator Install</div>
+        <div class="service-desc">Standby generator installation and transfer switch wiring for whole-home backup.</div>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-num">07</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 4l5 2.18V11c0 3.5-2.33 6.79-5 7.93-2.67-1.14-5-4.43-5-7.93V7.18L12 5z"/></svg>
+        </div>
+        <div class="service-name">Safety Devices</div>
+        <div class="service-desc">Smoke detectors, carbon monoxide detectors, intercom systems, and exhaust fans.</div>
+      </div>
+
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-num">08</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M9.5 6.5v3h-3v-3h3M11 5H5v6h6V5zm-1.5 9.5v3h-3v-3h3M11 13H5v6h6v-6zm6.5-6.5v3h-3v-3h3M19 5h-6v6h6V5zm-6 8h1.5v1.5H13V13zm1.5 1.5H16V16h-1.5v-1.5zM16 13h1.5v1.5H16V13zm-3 3h1.5v1.5H13V16zm1.5 1.5H16V19h-1.5v-1.5zM16 16h1.5v1.5H16V16zm1.5-1.5H19V16h-1.5v-1.5zM19 13h-1.5v-1.5H19V13zm-1.5 4.5H19V19h-1.5v-1.5z"/></svg>
+        </div>
+        <div class="service-name">Hot Tub & Spa Wiring</div>
+        <div class="service-desc">Jacuzzi, hot tub, and spa electrical hookups — properly permitted and inspected.</div>
+      </div>
+
+      <div class="service-card reveal" style="grid-column: span 1;">
+        <div class="service-num">09</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm1 17.93V18a1 1 0 00-2 0v1.93A8.01 8.01 0 014.07 13H6a1 1 0 000-2H4.07A8.01 8.01 0 0111 4.07V6a1 1 0 002 0V4.07A8.01 8.01 0 0119.93 11H18a1 1 0 000 2h1.93A8.01 8.01 0 0113 19.93z"/></svg>
+        </div>
+        <div class="service-name">Knob & Tube Removal</div>
+        <div class="service-desc">Safe removal and rewiring of outdated knob & tube wiring in older homes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── ABOUT ───────────────────────────────── -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div>
+        <div class="section-tag reveal">About Us</div>
+        <h2 class="section-title reveal reveal-delay-1">Family<br>Owned &<br>Operated</h2>
+
+        <div class="about-badge reveal reveal-delay-2">
+          <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+          <span>Sunderland & South Deerfield, MA</span>
+        </div>
+
+        <p class="about-body reveal reveal-delay-2">
+          Morin Electric LLC is a <strong>family-owned and operated</strong> electrical business originating in Sunderland, Massachusetts, with a business office in South Deerfield. We proudly serve the <strong>Pioneer Valley and beyond</strong>.
+        </p>
+        <p class="about-body reveal reveal-delay-2">
+          Owner <strong>Brent Morin</strong> and the team are ready to assist with any electrical service you need — bringing experience, craftsmanship, and genuine care to every job.
+        </p>
+
+        <ul class="about-checklist reveal reveal-delay-3">
+          <li>Fully Licensed & Insured</li>
+          <li>Free Estimates</li>
+          <li>Residential & Commercial</li>
+          <li>Pioneer Valley Service Area</li>
+          <li>Quality Workmanship Guarantee</li>
+          <li>Transparent Pricing</li>
+        </ul>
+
+        <a href="#quote" class="btn btn-primary reveal reveal-delay-3" style="margin-top:1.5rem">Get Your Free Estimate</a>
+      </div>
+
+      <div class="about-visual reveal reveal-delay-2">
+        <div class="about-accent2"></div>
+        <div class="about-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=800&q=80&auto=format&fit=crop"
+            alt="Professional electrician at work"
+            loading="lazy"
+          />
+        </div>
+        <div class="about-accent"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── QUOTE ───────────────────────────────── -->
+<section id="quote">
+  <div class="section-inner">
+    <div class="quote-grid">
+      <div class="quote-info">
+        <div class="section-tag reveal">No-Obligation</div>
+        <h2 class="section-title reveal reveal-delay-1">Request a<br>Free Quote</h2>
+
+        <p class="reveal reveal-delay-2">
+          We understand the importance of fulfilling your electrical needs while staying within your budget. <strong>All estimates are provided free of charge</strong> (excluding real estate sale estimates).
+        </p>
+
+        <p class="reveal reveal-delay-2">
+          <strong>Note:</strong> There is a <strong>$250 fee</strong> for estimates requested for real estate sales — however, if the estimate is accepted and work completed by Morin Electric, the $250 is deducted from the final invoice.
+        </p>
+
+        <div class="quote-contact-items reveal reveal-delay-3">
+          <a href="tel:4134539011" class="qc-item">
+            <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+            413-453-9011
+          </a>
+          <a href="mailto:ReceptionMorinElectric@gmail.com" class="qc-item">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            ReceptionMorinElectric@gmail.com
+          </a>
+          <div class="qc-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            14 Conway St, South Deerfield, MA 01373
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-1">
+        <div id="quoteForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" placeholder="Jane Smith" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" id="phone" placeholder="413-555-0100" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" placeholder="jane@example.com" required />
+            </div>
+            <div class="form-group">
+              <label for="service">Service Type</label>
+              <select id="service">
+                <option value="">Select a service…</option>
+                <option>Indoor Lighting</option>
+                <option>Outdoor Lighting</option>
+                <option>Panel Upgrade / Replacement</option>
+                <option>EV Charger Installation</option>
+                <option>Generator Installation</option>
+                <option>Outlets & Circuits</option>
+                <option>Hot Tub / Spa Wiring</option>
+                <option>Smoke / CO Detectors</option>
+                <option>Knob & Tube Removal</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group form-full">
+              <label for="address">Property Address</label>
+              <input type="text" id="address" placeholder="123 Main St, Amherst, MA" />
+            </div>
+            <div class="form-group form-full">
+              <label for="description">Describe Your Project *</label>
+              <textarea id="description" placeholder="Tell us what you need done…" required></textarea>
+            </div>
+            <p class="form-notice">
+              By submitting this form you agree to be contacted by Morin Electric LLC regarding your request. We never share your information.
+            </p>
+            <div class="form-full">
+              <button class="btn btn-primary" onclick="submitQuote()" style="width:100%;justify-content:center;font-size:1rem;padding:16px">
+                Send My Request →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-success" id="formSuccess">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+          <h3>Request Received!</h3>
+          <p>We'll be in touch shortly with your free estimate.<br>Questions? Call <a href="tel:4134539011" style="color:var(--yellow)">413-453-9011</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── TESTIMONIALS ───────────────────────── -->
+<section id="testimonials">
+  <div class="section-inner">
+    <div class="testimonials-header">
+      <div class="section-tag reveal">Client Reviews</div>
+      <h2 class="section-title reveal reveal-delay-1">What Our<br>Customers Say</h2>
+    </div>
+
+    <div class="testimonials-track">
+      <div class="testimonial-card reveal">
+        <div class="stars">
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </div>
+        <p class="testimonial-text">
+          Absolutely love the folks at Morin Electric. Kelly was super helpful in promptly scheduling a house call when our smoke detectors went haywire, and Brent proved extremely knowledgeable about a whole range of electrical issues. They don't gouge you on price either. Best of all they are friendly, lovely people. Highly recommend!
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">KC</div>
+          <div>
+            <div class="author-name">Karen Cardozo</div>
+            <div class="author-via">Verified Customer</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="stars">
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </div>
+        <p class="testimonial-text">
+          Brent and his team did an incredible job upgrading our electrical panel and installing new lighting throughout the house. Professional, on time, and the price was very fair. We'll definitely be calling Morin Electric for any future work.
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MR</div>
+          <div>
+            <div class="author-name">Mike R.</div>
+            <div class="author-via">Pioneer Valley</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="stars">
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </div>
+        <p class="testimonial-text">
+          Had Morin Electric install an EV charger and add several outdoor outlets. The whole process was smooth — they explained everything clearly, pulled the proper permits, and the work passed inspection first try. Couldn't ask for more.
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">SL</div>
+          <div>
+            <div class="author-name">Sarah L.</div>
+            <div class="author-via">Northampton, MA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── CONTACT ─────────────────────────────── -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-tag reveal">Find Us</div>
+    <h2 class="section-title reveal reveal-delay-1" style="margin-bottom:3rem">Contact Us</h2>
+
+    <div class="contact-grid">
+      <div>
+        <div class="contact-card reveal">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+          </div>
+          <div>
+            <div class="contact-card-label">Phone</div>
+            <div class="contact-card-value"><a href="tel:4134539011">413-453-9011</a></div>
+          </div>
+        </div>
+
+        <div class="contact-card reveal reveal-delay-1">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </div>
+          <div>
+            <div class="contact-card-label">Email</div>
+            <div class="contact-card-value"><a href="mailto:ReceptionMorinElectric@gmail.com">ReceptionMorinElectric@gmail.com</a></div>
+          </div>
+        </div>
+
+        <div class="contact-card reveal reveal-delay-2">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          </div>
+          <div>
+            <div class="contact-card-label">Office Address</div>
+            <div class="contact-card-value">14 Conway Street<br>South Deerfield, MA 01373</div>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-3" style="margin-top:2rem">
+          <a href="#quote" class="btn btn-primary">Get a Free Estimate</a>
+        </div>
+      </div>
+
+      <div class="map-placeholder reveal reveal-delay-2">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2934.68!2d-72.5984!3d42.4679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e6d3!2s14+Conway+St%2C+South+Deerfield%2C+MA+01373!5e0!3m2!1sen!2sus!4v1"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Morin Electric Location"
+        ></iframe>
+        <div class="map-overlay-tag">South Deerfield, MA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      Morin <span>Electric</span> LLC
+    </div>
+    <ul class="footer-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#quote">Quote</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2025 Morin Electric LLC · South Deerfield, MA</div>
+  </div>
+</footer>
+
+<script>
+  // ── Mobile Menu ───────────────────────────
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+
+  function closeMobile() {
+    mobileMenu.classList.remove('open');
+  }
+
+  // ── Scroll Reveal ─────────────────────────
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  // ── Quote Form ────────────────────────────
+  function submitQuote() {
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const description = document.getElementById('description').value.trim();
+
+    if (!name || !phone || !email || !description) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    document.getElementById('quoteForm').style.display = 'none';
+    const success = document.getElementById('formSuccess');
+    success.style.display = 'block';
+    success.style.opacity = '0';
+    setTimeout(() => { success.style.transition = 'opacity 0.5s'; success.style.opacity = '1'; }, 50);
+  }
+
+  // ── Nav scroll effect ─────────────────────
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 50) {
+      nav.style.background = 'rgba(8,8,8,0.98)';
+    } else {
+      nav.style.background = 'rgba(10,10,10,0.92)';
+    }
+  });
+</script>
+</body>
+</html>
